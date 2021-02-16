@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.gabriel.bookstore.domain.Categoria;
+import com.gabriel.bookstore.dtos.CategoriaDTO;
 import com.gabriel.bookstore.exceptions.ObjectNotFoundException;
 import com.gabriel.bookstore.repositories.CategoriaRepository;
 
@@ -29,4 +30,11 @@ public class CategoriaService {
         obj.setId(null);
         return repository.save(obj);
     }
+
+	public Categoria update(Integer id, CategoriaDTO objDto) {
+		Categoria obj = findById(id);
+        obj.setNome(objDto.getNome());
+        obj.setDescricao(objDto.getDescricao());
+        return repository.save(obj);
+	}
 }
