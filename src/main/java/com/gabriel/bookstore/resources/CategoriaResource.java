@@ -1,8 +1,13 @@
 package com.gabriel.bookstore.resources;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.gabriel.bookstore.domain.Categoria;
+import com.gabriel.bookstore.dtos.CategoriaDTO;
 import com.gabriel.bookstore.service.CategoriaService;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +26,13 @@ public class CategoriaResource {
     public ResponseEntity<Categoria> findById(@PathVariable Integer id){
         Categoria obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<CategoriaDTO>> findAll(){
+        List<Categoria> list = service.findAll();
+        List<CategoriaDTO> listDTO = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(listDTO);
     }
 }
 

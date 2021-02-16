@@ -1,5 +1,6 @@
 package com.gabriel.bookstore.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.gabriel.bookstore.domain.Categoria;
@@ -18,5 +19,9 @@ public class CategoriaService {
     public Categoria findById(Integer id){
         Optional<Categoria> obj = repository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! id: " + id + ", Tipo: " + Categoria.class.getName()));
+    }
+
+    public List<Categoria> findAll(){
+        return repository.findAll();
     }
 }
