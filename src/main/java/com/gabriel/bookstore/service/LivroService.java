@@ -3,6 +3,7 @@ package com.gabriel.bookstore.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.gabriel.bookstore.domain.Categoria;
 import com.gabriel.bookstore.domain.Livro;
 import com.gabriel.bookstore.repositories.LivroRepository;
 
@@ -40,4 +41,11 @@ public class LivroService {
         newObj.setNome_autor(obj.getNome_autor());
         newObj.setTexto(obj.getTexto());
     }
+
+	public Livro create(Integer id_cat, Livro obj) {
+		obj.setId(null);
+        Categoria cat = categoriaService.findById(id_cat);
+        obj.setCategoria(cat);
+        return repository.save(obj);
+	}
 }
